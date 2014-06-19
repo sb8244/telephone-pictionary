@@ -5,6 +5,9 @@ class ApplicationController < ActionController::Base
 
   before_filter :set_current_user
 
+  private
+
+  # Makes the user available in all models, which is pretty handy
   def set_current_user
     User.current = current_user if current_user
   end
