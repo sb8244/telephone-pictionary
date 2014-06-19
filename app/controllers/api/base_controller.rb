@@ -8,7 +8,7 @@ class Api::BaseController < ApplicationController
   rescue_from ActiveRecord::RecordInvalid, :with => :record_invalid
   rescue_from ActiveRecord::RecordNotFound, :with => :record_missing
 
-  # users of this filter must implement room
+  # users of this filter must implement .room
   def validate_room!
     return if room.is_public?
     return if current_user && current_user.accessible_rooms.include?(room)
