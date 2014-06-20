@@ -10,7 +10,7 @@ class Api::Room::GamesController < Api::BaseController
   end
 
   def create
-    render json: Game::Create.new(params: params, room: room).execute!
+    render json: Game::Create.new(params, room.games).execute!
   end
 
   def destroy

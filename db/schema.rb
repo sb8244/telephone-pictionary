@@ -11,21 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140618034612) do
-
-  create_table "drawings", force: true do |t|
-    t.text     "data",       null: false
-    t.integer  "user_id",    null: false
-    t.integer  "room_id",    null: false
-    t.integer  "event_id",   null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20140620031356) do
 
   create_table "events", force: true do |t|
     t.integer  "position",   null: false
     t.integer  "user_id",    null: false
     t.integer  "game_id",    null: false
+    t.text     "data",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

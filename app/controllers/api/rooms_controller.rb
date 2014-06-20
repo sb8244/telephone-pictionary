@@ -1,5 +1,4 @@
 class Api::RoomsController < Api::BaseController
-
   before_filter :validate_room!, only: [:show, :destroy]
 
   def index
@@ -11,7 +10,7 @@ class Api::RoomsController < Api::BaseController
   end
 
   def create
-    render json: current_user.rooms.create!(room_params)
+    render json: Room::Create.new(params, current_user.rooms).execute!
   end
 
   def destroy
@@ -25,10 +24,6 @@ class Api::RoomsController < Api::BaseController
   end
 
   private
-
-  def room_params
-    params.require(:room).permit(:title, :is_public)
-  end
 
   def rooms
     current_user.accessible_rooms

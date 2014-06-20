@@ -5,7 +5,7 @@ RSpec.describe Game::Create, :type => :model do
   let!(:user2) { FactoryGirl.create(:user) }
   let!(:room) { Room.create(title: "Room", is_public: true) }
 
-  subject { Game::Create.new(params: params, room: room, user: user) }
+  subject { Game::Create.new(params, room.games, user: user) }
 
   let(:params) {
     ActionController::Parameters.new({

@@ -12,7 +12,12 @@ class Api::BaseController < ApplicationController
   def validate_room!
     return if room.is_public?
     return if current_user && current_user.accessible_rooms.include?(room)
-    render json: [], status: 404
+    render json: { error: "room not found" } , status: 404
+  end
+
+  # users of this filter must implement .game
+  def validate_game!
+    render json: { error: "game not found" } , status: 404 unless current_user.games.include?(game)
   end
 
   private
@@ -22,6 +27,8 @@ class Api::BaseController < ApplicationController
   end
 
   def record_missing
-    render json: [], status: 404
+    render json: { error: "record not found" }, status: 404
   end
 end
+
+# Use the verb objects to simplify controllers superbly
