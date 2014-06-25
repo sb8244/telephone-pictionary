@@ -1,0 +1,11 @@
+/*
+ *= require_tree .
+ *= require_self
+ */
+@import "bootstrap";
+
+canvas.drawing {
+  border: 1px solid #ccc;
+  width: 500px;
+  height: 300px;
+}

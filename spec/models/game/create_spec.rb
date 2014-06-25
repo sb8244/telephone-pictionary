@@ -15,15 +15,6 @@ RSpec.describe Game::Create, :type => :model do
     })
   }
 
-  context "without user ids" do
-    before { params[:game][:user_ids] = nil }
-    it "doesn't create a game without user ids" do
-      expect{
-        subject.execute!
-      }.to raise_error Api::Error
-    end
-  end
-
   it "creates a new game" do
     expect{
       subject.execute!

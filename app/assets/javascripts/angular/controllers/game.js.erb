@@ -1,0 +1,35 @@
+APP.controller('GameController', function($scope, $stateParams, Restangular) {
+  Restangular.one("games", $stateParams.id).get().then(function(game) {
+    $scope.game = game;
+    $scope.room = game.room;
+  });
+
+  $scope.startGame = function(game) {
+    game.customPOST({}, "start").then(function(game) {
+      $scope.game = game;
+    });
+  };
+
+  $scope.input = {};
+  $scope.$watch('guess', function(val) {
+    console.log(val);
+  });
+
+  $scope.submitDrawing = function() {
+    var canvas = $("#drawing").get()[0];
+    var data = canvas.toDataURL();
+    $scope.game.one("events").customPOST(
+      {data: data, step: $scope.game.current_step }
+    ).then(function() {
+      alert("Made it");
+    });
+  };
+
+  $scope.submitGuess = function() {
+    $scope.game.one("events").customPOST(
+      {data: $scope.input.guess, step: $scope.game.current_step}
+    ).then(function() {
+      console.log("made it!");
+    });
+  };
+});

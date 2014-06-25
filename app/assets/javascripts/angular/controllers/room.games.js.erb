@@ -1,0 +1,15 @@
+APP.controller('RoomGamesController', function($scope, $stateParams, Restangular) {
+  Restangular.one('rooms', $stateParams.room_id).get().then(function(room) {
+    $scope.room = room;
+    $scope.gameQuery = room.all('games');
+    $scope.games = $scope.gameQuery.getList().$object;
+  });
+
+  $scope.createNewGame = function() {
+    $scope.room.post("games", {}).then(function(game) {
+      $scope.games = $scope.gameQuery.getList().$object;
+    }, function() {
+      alert("Game could not be created");
+    });
+  };
+});

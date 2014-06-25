@@ -1,0 +1,6 @@
+div
+  h3 Games in {{ room.title }}
+button.btn.btn-success(ng-click="createNewGame()") Create New Game
+ul
+  li(ng-repeat="game in games")
+    a(ui-sref="game({id: game.id})") {{game.created_at}}

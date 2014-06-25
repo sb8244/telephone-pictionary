@@ -26,26 +26,11 @@ RSpec.describe Api::Room::GamesController, :type => :controller do
     end
   end
 
-  describe "GET show" do
-    it "has the right game" do
-      get :show, room_id: room.id, id: game.id
-      expect(response_json["id"]).to eq(game.id)
-    end
-  end
-
   describe "POST create" do
     it "creates a game" do
       expect{
         post :create, room_id: room.id, game: { user_ids: [FactoryGirl.create(:user).id] }
       }.to change{ room.games.count }.by(1)
-    end
-  end
-
-  describe "DELETE destroy" do
-    it "removes a game" do
-      expect{
-        delete :destroy, room_id: room.id, id: game.id
-      }.to change{ room.games.count }.by(-1)
     end
   end
 end

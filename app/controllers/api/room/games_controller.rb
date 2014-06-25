@@ -5,16 +5,8 @@ class Api::Room::GamesController < Api::BaseController
     render json: games
   end
 
-  def show
-    render json: game
-  end
-
   def create
-    render json: Game::Create.new(params, room.games).execute!
-  end
-
-  def destroy
-    render json: game.destroy
+    render json: Game::Create.new(params, games).execute!
   end
 
   private

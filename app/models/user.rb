@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_many :drawings
   has_many :events
 
+  after_create :add_default_room
+
   # Accessible rooms are either public or joined
   def accessible_rooms
     Room.all_public | rooms
@@ -19,5 +21,11 @@ class User < ActiveRecord::Base
 
   def self.current=(user)
     Thread.current[:user] = user
+  end
+
+  private
+
+  def add_default_room
+    self.rooms.create!(title: "Private Room: #{self.email}", is_public: false)
   end
 end

@@ -1,0 +1,48 @@
+/*
+==== Standard ====
+= require jquery
+= require bootstrap
+
+==== Angular ====
+= require angular
+
+==== Angular Plugins ====
+= require lodash
+= require restangular
+= require angular-ui-router
+
+= require_self
+= require_tree ./angular/templates
+= require_tree .
+*/
+
+var APP = angular.module('<%= Rails.application.class.parent_name %>', [
+  'ui.router',
+  'templates',
+  'restangular'
+]);
+
+APP.config(function($stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider) {
+  RestangularProvider.setBaseUrl("/api");
+
+  $urlRouterProvider.otherwise("/");
+  $stateProvider
+    .state('rooms', {
+      url: "/",
+      templateUrl: "rooms/index.html",
+      abstract: true
+    })
+    .state('rooms.games', {
+      url: ":room_id/games",
+      templateUrl: "rooms/games.all.html",
+      controller: "RoomGamesController"
+    });
+
+  $stateProvider.state('game', {
+      url: "/games/:id",
+      templateUrl: "games/game.html",
+      controller: "GameController"
+    });
+
+  $locationProvider.html5Mode(true);
+});

@@ -1,0 +1,8 @@
+{
+  "name": "PassPic",
+  "dependencies": {
+    "angular": "~1.2.19",
+    "restangular": "~1.4.0",
+    "angular-ui-router": "0.2.10"
+  }
+}

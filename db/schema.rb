@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140620031356) do
+ActiveRecord::Schema.define(version: 20140623035559) do
 
   create_table "events", force: true do |t|
-    t.integer  "position",   null: false
+    t.integer  "step",       null: false
     t.integer  "user_id",    null: false
     t.integer  "game_id",    null: false
     t.text     "data",       null: false
@@ -23,11 +23,10 @@ ActiveRecord::Schema.define(version: 20140620031356) do
   end
 
   create_table "games", force: true do |t|
-    t.integer  "max_length",       default: 9
-    t.integer  "current_position", default: 0
-    t.integer  "room_id",                      null: false
+    t.integer  "room_id",                    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "started",    default: false, null: false
   end
 
   create_table "games_users", force: true do |t|

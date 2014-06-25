@@ -2,7 +2,11 @@ class Event < ActiveRecord::Base
   belongs_to :user
   belongs_to :game
 
+  def self.type(step)
+    step.even? ? :text : :drawing
+  end
+
   def type
-    position.even? ? :text : :drawing
+    self.class.type(step)
   end
 end

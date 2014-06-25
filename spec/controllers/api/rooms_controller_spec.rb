@@ -15,13 +15,11 @@ RSpec.describe Api::RoomsController, :type => :controller do
 
       it "shows rooms" do
         get :index
-        expect(response_json.count).to eq(public_room_count)
+        expect(response_json.count).to eq(public_room_count + 1)
       end
     end
 
     context "with rooms I belong to" do
-      before { user.rooms.create!(title: "Room", is_public: false) }
-
       it "shows private rooms" do
         get :index
         expect(response_json.count).to eq(1)
@@ -42,7 +40,7 @@ RSpec.describe Api::RoomsController, :type => :controller do
       it "associates the user properly" do
         expect{
           post :create, room: { title: "Room", is_public: true }
-        }.to change{ user.reload.rooms.count }.to(1)
+        }.to change{ user.reload.rooms.count }.to(2) # take default room into account
       end
     end
 

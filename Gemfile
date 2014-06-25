@@ -6,6 +6,8 @@ ruby '2.1.1'
 # rails
 gem 'rails', '4.1.1'
 
+gem "active_model_serializers"
+
 # db
 gem 'sqlite3'
 
@@ -16,6 +18,9 @@ gem 'jquery-rails'
 
 # users
 gem 'devise'
+
+gem 'slim-rails'
+gem 'bootstrap-sass'
 
 group :development do
   gem 'spring-commands-rspec'
