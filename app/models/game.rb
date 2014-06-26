@@ -12,7 +12,7 @@ class Game < ActiveRecord::Base
   end
 
   def finished?
-    current_step >= game_length
+    current_step > 1 && current_step >= game_length
   end
 
   def current_step_type

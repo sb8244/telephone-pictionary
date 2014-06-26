@@ -17,6 +17,15 @@ class Api::GamesController < Api::BaseController
     render json: game
   end
 
+  def users
+    render json: User.all - game.users
+  end
+
+  def invite
+    game.users << User.find(params[:user_id]) unless game.started?
+    render json: true
+  end
+
   private
 
   def game

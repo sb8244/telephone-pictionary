@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     resources :games, only: [:show, :destroy] do
       member do
         post 'start'
+        post 'invite'
+        get 'users'
       end
       resources :events, controller: "game/events"
     end

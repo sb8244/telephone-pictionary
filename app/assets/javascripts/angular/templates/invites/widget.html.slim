@@ -1,0 +1,20 @@
+div ng-controller="InviteFriendsController"
+  h4 Add tons of friends!
+  table.table.table-striped.table-bordered
+    thead
+      tr
+        th Email
+        th Invite
+    tbody
+      tr ng-repeat="user in users"
+        td {{user.email}}
+        td: button.btn.btn-primary ng-click="addUser(user)" Invite!
+
+  form.form-horizontal
+    .form-group
+      label.control-label.col-sm-4 Friend's Email:
+      .col-sm-4
+        input.form-control ng-model="input.email"
+    .form-group
+      .col-sm-4.col-sm-offset-4
+        button.btn.btn-success.btn-block ng-click="sendInvite()" Send Invite

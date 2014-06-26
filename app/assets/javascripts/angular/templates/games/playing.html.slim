@@ -1,0 +1,16 @@
+| On step {{game.current_step}} of {{game.game_length}}
+div.current_step_type
+  div ng-if="!game.step_completed"
+    div ng-if="game.current_step_type == 'text'"
+      strong Time to Guess!
+      p: img src="{{game.round_data}}"
+      p: input ng-model="input.guess"
+      p: button.btn.btn-primary(ng-click="submitGuess()") Submit Guess!
+
+    div ng-if="game.current_step_type == 'drawing'"
+      p: strong Time to Draw: {{game.round_data}}
+      canvas.drawing#drawing drawing=""
+      p: button.btn.btn-primary ng-click="submitDrawing()" Submit Drawing!
+
+  div ng-if="game.step_completed"
+    | Good job! Waiting on {{ game.waiting_on.length }} more.
