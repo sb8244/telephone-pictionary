@@ -27,22 +27,43 @@ APP.config(function($stateProvider, $urlRouterProvider, $locationProvider, Resta
 
   $urlRouterProvider.otherwise("/");
   $stateProvider
-    .state('rooms', {
+    .state('index', {
       url: "/",
+      templateUrl: "index.html"
+    })
+    .state('rooms', {
+      url: "/rooms",
       templateUrl: "rooms/index.html",
       abstract: true
     })
     .state('rooms.games', {
-      url: ":room_id/games",
+      url: "/:room_id/games",
       templateUrl: "rooms/games.all.html",
       controller: "RoomGamesController"
     });
 
   $stateProvider.state('game', {
       url: "/games/:id",
-      templateUrl: "games/game.html",
-      controller: "GameController"
+      views: {
+        '': {
+          templateUrl: "games/game.html",
+          controller: "GameController"
+        },
+        'left': {
+          templateUrl: "games/sidebar.html",
+          controller: "GameWaitingController"
+        }
+      }
     });
 
   $locationProvider.html5Mode(true);
+});
+
+APP.run(function($rootScope) {
+  $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+    $rootScope.sidebarLeftContent = null;
+    $rootScope.sidebarRightContent = null;
+    $rootScope.leftScope = null;
+    $rootScope.rightScope = null;
+  });
 });

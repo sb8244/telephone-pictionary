@@ -7,12 +7,11 @@ class Game < ActiveRecord::Base
     step = Game::CurrentStep.new(self).step
   end
 
-  def round_data(user)
-    Game::LastEvent.new(self, user).event.try!(:data)
-  end
-
+  # The game starts with step 0 (auto generated) and goes round robin
+  # back and forth. So a 2 player game ends when step 2 is complete and
+  # step 3 is current
   def finished?
-    current_step > 1 && current_step >= game_length
+    current_step > 1 && current_step >= game_length + 1
   end
 
   def current_step_type
@@ -24,7 +23,18 @@ class Game < ActiveRecord::Base
   end
 
   def waiting_on
-    users_completed = events.where(step: current_step).includes(:user).map{ |e| e.user }
+    return [] if finished?
+    users_completed = events.where(step: current_step).joins(:user).map{ |e| e.user }
     users - users_completed
+  end
+
+  ### Last Event for User methods ###
+
+  def sequence_id(user)
+    Game::LastEvent.new(self, user).event.try!(:sequence)
+  end
+
+  def round_data(user)
+    Game::LastEvent.new(self, user).event.try!(:data)
   end
 end

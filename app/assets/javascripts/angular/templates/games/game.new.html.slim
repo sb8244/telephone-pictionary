@@ -1,0 +1,6 @@
+h3 Time to Play!
+p Players in this game: {{game.game_length}} (more players means more fun!)
+
+ng-include src="'invites/widget.html'"
+div ng-if="game.game_length > 1"
+  button.btn.btn-default ng-click="startGame(game)" Start Game

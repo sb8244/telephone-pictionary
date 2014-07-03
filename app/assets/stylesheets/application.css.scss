@@ -1,11 +1,48 @@
 /*
+ * https://kuler.adobe.com/Alternative-bananas-color-theme-3964714/edit/?copy=true&base=2&rule=Custom&selected=4&name=Copy%20of%20Alternative%20bananas&mode=rgb&rgbvalues=0.06666666666666667,0.1843137254901961,0.2549019607843137,0.023529411764705882,0.5215686274509804,0.5294117647058824,0.30980392156862746,0.7254901960784313,0.6235294117647059,0.9490196078431372,0.6941176470588235,0.20392156862745098,0.9294117647058824,0.3333333333333333,0.23137254901960785&swatchOrder=0,1,2,3,4
  *= require_tree .
  *= require_self
  */
 @import "bootstrap";
 
+$app-background: #fff;
+
+body {
+  background: $app-background;
+}
+
 canvas.drawing {
   border: 1px solid #ccc;
   width: 500px;
   height: 300px;
+}
+
+.jumbotron {
+  width: 100%;
+  height: 200px;
+  background: #ED553B;
+  color: $app-background;
+
+  h1 {
+    font-size: $font-size-h2;
+  }
+}
+
+.room-bar {
+  h3 {
+    margin-top: 0px;
+  }
+}
+
+.finished {
+  p.lead {
+    font-size: 1.3em;
+  }
+}
+
+.history-sequence {
+  @extend .well;
+
+  .history {
+  }
 }

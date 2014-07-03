@@ -4,8 +4,8 @@ RSpec.describe Api::Game::EventsController, :type => :controller do
   let(:user) { FactoryGirl.create(:user) }
   let(:room) { Room.create(title: "Room", is_public: true) }
   let(:game) { room.games.create!(users: [user]) }
-  let!(:event) { game.events.create!(data: "Test", step: 0, user: user) }
-  let!(:event2) { game.events.create!(data: "Test", step: 1, user: user) }
+  let!(:event) { game.events.create!(data: "Test", step: 0, user: user, sequence: 0) }
+  let!(:event2) { game.events.create!(data: "Test", step: 1, user: user, sequence: 0) }
 
   before(:each) do
     sign_in(user)
@@ -31,7 +31,7 @@ RSpec.describe Api::Game::EventsController, :type => :controller do
   describe "POST create" do
     it "creates an event" do
       expect{
-        post :create, game_id: game.id, event: { step: 0, data: "Test" }
+        post :create, game_id: game.id, event: { step: 0, data: "Test", sequence: 0 }
       }.to change{ game.events.count }.by(1)
     end
   end

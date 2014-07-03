@@ -30,4 +30,8 @@ let!(:user) { FactoryGirl.create(:user) }
       }.to change{ room.games.count }.by(-1)
     end
   end
+
+  describe "POST start" do
+    pending "The specs"
+  end
 end

@@ -8,7 +8,7 @@ RSpec.describe Event::Create, :type => :model do
 
   subject { Event::Create.new(wrapped, game.events) }
 
-  let(:params) { { event: { step: 0, data: "Cat munching on asparagus" } } }
+  let(:params) { { event: { step: 0, data: "Cat munching on asparagus", sequence: 0} } }
   let(:wrapped) { ActionController::Parameters.new(params) }
 
   it "creates an event" do

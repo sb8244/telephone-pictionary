@@ -2,7 +2,7 @@ class Api::Room::GamesController < Api::BaseController
   before_filter :validate_room!
 
   def index
-    render json: games
+    render json: games.joins(:room)
   end
 
   def create

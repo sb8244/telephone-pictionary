@@ -5,21 +5,14 @@ html( ng-app=Rails.application.class.parent_name )
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
   body
-    nav.navbar.navbar-inverse
-      .container
-        .navbar-header
-          button.navbar-toggle(data-toggle="collapse" data-target=".navbar-collapse")
-            span.sr-only Toggle Navigation
-            span.icon-bar
-            span.icon-bar
-            span.iconbar
-          a.navbar-brand(href="#" ui-sref='/') PassPic
-        .collapse.navbar-collapse
-          ul.nav.navbar-nav
-            li: a(ui-sref="rooms") Rooms
+    .jumbotron
+      p Connect your Facebook. Add your friends. Then...
+      h1 Pass The Picture!
     .container
       .row
         .col-md-3
-          div(ng-include="'sidebar/rooms.html'")
-        .col-md-9
+          div(ng-include="'sidebar/left.html'")
+        .col-md-7
           div(ui-view)
+        .col-md-2
+          div(ng-include="'sidebar/right.html'")

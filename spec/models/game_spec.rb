@@ -25,8 +25,8 @@ RSpec.describe Game, :type => :model do
 
     context "with no events in the latest step" do
       before do
-        subject.events.create!(step: 0, user: user, data: "Test")
-        subject.events.create!(step: 0, user: user2, data: "Test")
+        subject.events.create!(step: 0, user: user, data: "Test", sequence: 0)
+        subject.events.create!(step: 0, user: user2, data: "Test", sequence: 0)
       end
 
       it "has the correct step" do
@@ -36,9 +36,9 @@ RSpec.describe Game, :type => :model do
 
     context "with events in the latest step" do
       before do
-        subject.events.create!(step: 0, user: user, data: "Test")
-        subject.events.create!(step: 0, user: user2, data: "Test")
-        subject.events.create!(step: 1, user: user, data: "Test")
+        subject.events.create!(step: 0, user: user, data: "Test", sequence: 0)
+        subject.events.create!(step: 0, user: user2, data: "Test", sequence: 0)
+        subject.events.create!(step: 1, user: user, data: "Test", sequence: 0)
       end
 
       it "has the correct step" do
@@ -48,10 +48,10 @@ RSpec.describe Game, :type => :model do
 
     context "with a done game" do
       before do
-        subject.events.create!(step: 0, user: user, data: "Test")
-        subject.events.create!(step: 0, user: user2, data: "Test")
-        subject.events.create!(step: 1, user: user, data: "Test")
-        subject.events.create!(step: 1, user: user2, data: "Test")
+        subject.events.create!(step: 0, user: user, data: "Test", sequence: 0)
+        subject.events.create!(step: 0, user: user2, data: "Test", sequence: 0)
+        subject.events.create!(step: 1, user: user, data: "Test", sequence: 0)
+        subject.events.create!(step: 1, user: user2, data: "Test", sequence: 0)
       end
 
       it "has the correct step" do
@@ -65,8 +65,8 @@ RSpec.describe Game, :type => :model do
 
     context "with no events in the latest step" do
       before do
-        subject.events.create!(step: 0, user: user, data: "Test")
-        subject.events.create!(step: 0, user: user2, data: "Test")
+        subject.events.create!(step: 0, user: user, data: "Test", sequence: 0)
+        subject.events.create!(step: 0, user: user2, data: "Test", sequence: 0)
       end
 
       it "has the right list" do
@@ -77,14 +77,26 @@ RSpec.describe Game, :type => :model do
 
     context "with events in the latest step" do
       before do
-        subject.events.create!(step: 0, user: user, data: "Test")
-        subject.events.create!(step: 0, user: user2, data: "Test")
-        subject.events.create!(step: 1, user: user, data: "Test")
+        subject.events.create!(step: 0, user: user, data: "Test", sequence: 0)
+        subject.events.create!(step: 0, user: user2, data: "Test", sequence: 0)
+        subject.events.create!(step: 1, user: user, data: "Test", sequence: 0)
       end
 
       it "has the right list" do
         expect(subject.waiting_on).not_to include(user)
         expect(subject.waiting_on).to include(user2)
+      end
+
+      context "with a finished game" do
+        before do
+          subject.events.create!(step: 1, user: user2, data: "Test", sequence: 0)
+          subject.events.create!(step: 2, user: user, data: "Test", sequence: 0)
+          subject.events.create!(step: 2, user: user2, data: "Test", sequence: 0)
+        end
+
+        it "is empty" do
+          expect(subject.waiting_on).to eq([])
+        end
       end
     end
   end

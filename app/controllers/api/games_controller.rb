@@ -11,8 +11,8 @@ class Api::GamesController < Api::BaseController
 
   def start
     game.update!(started: true)
-    game.users.each do |user|
-      game.events.create!(step: 0, user: user, data: random_text)
+    game.users.each_with_index do |user, i|
+      game.events.create!(step: 0, user: user, data: random_text, sequence: i)
     end
     render json: game
   end
@@ -26,7 +26,15 @@ class Api::GamesController < Api::BaseController
     render json: true
   end
 
+  def history
+    render json: game_history
+  end
+
   private
+
+  def game_history
+    Game::History.new(game).history
+  end
 
   def game
     Game.find(params[:id])

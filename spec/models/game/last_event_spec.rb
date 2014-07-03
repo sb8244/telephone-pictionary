@@ -7,9 +7,9 @@ RSpec.describe Game::LastEvent, :type => :model do
 
   let(:game) { Game.create!(room_id: 1, users: [u1, u2, u3]) }
 
-  let!(:a) { game.events.create(user: u1, step: 0, data: "a") }
-  let!(:b) { game.events.create(user: u2, step: 0, data: "b") }
-  let!(:c) { game.events.create(user: u3, step: 0, data: "c") }
+  let!(:a) { game.events.create(user: u1, step: 0, data: "a", sequence: 0) }
+  let!(:b) { game.events.create(user: u2, step: 0, data: "b", sequence: 0) }
+  let!(:c) { game.events.create(user: u3, step: 0, data: "c", sequence: 0) }
 
   context "with an initial game state" do
     it "has the right step for u1" do
@@ -24,9 +24,9 @@ RSpec.describe Game::LastEvent, :type => :model do
   end
 
   context "with the second game state" do
-    let!(:d) { game.events.create(user: u1, step: 1, data: "d") }
-    let!(:e) { game.events.create(user: u2, step: 1, data: "e") }
-    let!(:f) { game.events.create(user: u3, step: 1, data: "f") }
+    let!(:d) { game.events.create(user: u1, step: 1, data: "d", sequence: 0) }
+    let!(:e) { game.events.create(user: u2, step: 1, data: "e", sequence: 0) }
+    let!(:f) { game.events.create(user: u3, step: 1, data: "f", sequence: 0) }
 
     it "has the right step for u1" do
       expect(Game::LastEvent.new(game, u1).event).to eq(f)

@@ -1,0 +1,3 @@
+div.waiting-on ng-if="game.playing"
+  h3 Waiting On
+  div ng-repeat="user in game.waiting_on" {{user.email}}

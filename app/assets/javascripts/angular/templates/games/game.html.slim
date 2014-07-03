@@ -1,12 +1,6 @@
-div ng-if="game"
-  h3 Time to Play!
-  p Players in this game: {{game.game_length}} (more players means more fun!)
-
-  div ng-if="game.finished"
-    | GG!
-  div ng-if="!game.started"
-    div ng-include="'invites/widget.html'"
-    div ng-if="game.game_length > 1"
-      button.btn.btn-default ng-click="startGame(game)" Start Game
-  div ng-if="game.started && !game.finished"
-    div ng-include="'games/playing.html'"
+div ng-if="game.finished"
+  ng-include src="'games/game.finished.html'"
+div ng-if="game.started === false"
+  ng-include src="'games/game.new.html'"
+div ng-if="game.playing"
+  div ng-include="'games/game.playing.html'"

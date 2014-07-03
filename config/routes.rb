@@ -7,6 +7,7 @@ Rails.application.routes.draw do
         post 'start'
         post 'invite'
         get 'users'
+        get 'history'
       end
       resources :events, controller: "game/events"
     end
