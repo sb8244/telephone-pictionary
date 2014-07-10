@@ -6,6 +6,8 @@ ruby '2.1.1'
 # rails
 gem 'rails', '4.1.1'
 
+gem 'dotenv-rails'
+
 gem "active_model_serializers"
 
 # db
@@ -18,6 +20,8 @@ gem 'jquery-rails'
 
 # users
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 gem 'slim-rails'
 gem 'bootstrap-sass'

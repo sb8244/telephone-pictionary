@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 
   namespace :api, defaults: {format: :json} do
     resources :games, only: [:show, :destroy] do
@@ -20,7 +20,6 @@ Rails.application.routes.draw do
       end
     end
   end
-
 
   get "*path", to: "application#index"
   root 'application#index'

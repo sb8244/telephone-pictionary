@@ -8,6 +8,8 @@ html( ng-app=Rails.application.class.parent_name )
     .jumbotron
       p Connect your Facebook. Add your friends. Then...
       h1 Pass The Picture!
+    header ng-controller="HeaderController"
+      button.btn.btn-info ng-click="logout()"  Sign Out
     .container
       .row
         .col-md-3

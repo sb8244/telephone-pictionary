@@ -15,6 +15,8 @@ RSpec.describe Game::Create, :type => :model do
     })
   }
 
+  pending "Move this into the controller"
+
   it "creates a new game" do
     expect{
       subject.execute!

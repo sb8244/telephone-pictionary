@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :database_authenticatable, :omniauthable, omniauth_providers: [:facebook]
 
   has_and_belongs_to_many :rooms
   has_and_belongs_to_many :games

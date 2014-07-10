@@ -26,6 +26,12 @@ APP.config(function($stateProvider, $urlRouterProvider, $locationProvider, Resta
   RestangularProvider.setBaseUrl("/api");
 
   $urlRouterProvider.otherwise("/");
+
+  $stateProvider.state('login', {
+      url: "/login",
+      templateUrl: "login.html"
+    });
+
   $stateProvider
     .state('index', {
       url: "/",
@@ -57,13 +63,4 @@ APP.config(function($stateProvider, $urlRouterProvider, $locationProvider, Resta
     });
 
   $locationProvider.html5Mode(true);
-});
-
-APP.run(function($rootScope) {
-  $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-    $rootScope.sidebarLeftContent = null;
-    $rootScope.sidebarRightContent = null;
-    $rootScope.leftScope = null;
-    $rootScope.rightScope = null;
-  });
 });

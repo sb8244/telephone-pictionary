@@ -1,0 +1,23 @@
+APP.factory("RestangularDevise", function (Restangular) {
+  return Restangular.withConfig(function (RestangularConfigurer) {
+    RestangularConfigurer.setBaseUrl("");
+  });
+});
+
+APP.service("Devise", function ($rootScope, RestangularDevise, $state) {
+  this.logout = function() {
+    RestangularDevise.all("users").customDELETE("sign_out.json").then(function() {
+      $state.go('login');
+    });
+  };
+});
+
+APP.run(function($state, Restangular) {
+  Restangular.setErrorInterceptor(function(response, deferred, responseHandler) {
+    if(response.status == 401) {
+      $state.go("login");
+      return false;
+    }
+    return true;
+  });
+});

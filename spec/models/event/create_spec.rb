@@ -11,6 +11,8 @@ RSpec.describe Event::Create, :type => :model do
   let(:params) { { event: { step: 0, data: "Cat munching on asparagus", sequence: 0} } }
   let(:wrapped) { ActionController::Parameters.new(params) }
 
+  pending "Move this into the controller"
+
   it "creates an event" do
     expect{
       subject.execute!
