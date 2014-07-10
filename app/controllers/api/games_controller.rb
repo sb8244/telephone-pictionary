@@ -1,8 +1,16 @@
 class Api::GamesController < Api::BaseController
-  before_filter :validate_game!
+  before_filter :validate_game!, except: [:index, :create]
+
+  def index
+    render json: games
+  end
 
   def show
     render json: game
+  end
+
+  def create
+    render json: Game::Create.new(params, games).execute!
   end
 
   def destroy
@@ -31,6 +39,10 @@ class Api::GamesController < Api::BaseController
   end
 
   private
+
+  def games
+    current_user.games
+  end
 
   def game_history
     Game::History.new(game).history

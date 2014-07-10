@@ -3,7 +3,6 @@ class GameSerializer < ActiveModel::Serializer
              :current_step, :current_step_type, :finished?,
              :round_data, :waiting_on, :step_completed?, :round_sequence
 
-  has_one :room
   has_many :waiting_on, serializer: UserSerializer
 
   def round_data

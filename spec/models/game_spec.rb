@@ -5,7 +5,7 @@ RSpec.describe Game, :type => :model do
   let(:user) { FactoryGirl.create(:user) }
   let(:user2) { FactoryGirl.create(:user) }
 
-  subject { Game.create!(room_id: 1) }
+  subject { Game.create! }
 
   it "has the right game length" do
     subject.users << user

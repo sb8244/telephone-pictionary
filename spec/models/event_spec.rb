@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Event, :type => :model do
 
   let(:user) { FactoryGirl.create(:user) }
-  let(:game) { user.games.create!(room_id: 1) }
+  let(:game) { user.games.create! }
 
   describe "type" do
     it "is the first event" do

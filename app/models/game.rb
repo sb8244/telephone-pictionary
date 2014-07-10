@@ -1,7 +1,6 @@
 class Game < ActiveRecord::Base
   has_and_belongs_to_many :users
   has_many :events
-  belongs_to :room
 
   def current_step
     step = Game::CurrentStep.new(self).step

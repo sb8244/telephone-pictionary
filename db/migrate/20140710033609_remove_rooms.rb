@@ -4,11 +4,6 @@ class RemoveRooms < ActiveRecord::Migration
   end
 
   def down
-    create_table :rooms do |t|
-      t.string :title, null: false
-      t.boolean :is_public, null: false, default: true
-
-      t.timestamps
-    end
+    raise "Can't be downgraded"
   end
 end

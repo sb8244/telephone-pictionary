@@ -5,7 +5,7 @@ RSpec.describe Game::LastEvent, :type => :model do
   let(:u2) { FactoryGirl.create(:user) }
   let(:u3) { FactoryGirl.create(:user) }
 
-  let(:game) { Game.create!(room_id: 1, users: [u1, u2, u3]) }
+  let(:game) { Game.create!(users: [u1, u2, u3]) }
 
   let!(:a) { game.events.create(user: u1, step: 0, data: "a", sequence: 0) }
   let!(:b) { game.events.create(user: u2, step: 0, data: "b", sequence: 0) }

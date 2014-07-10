@@ -3,8 +3,7 @@ require 'rails_helper'
 RSpec.describe Event::Create, :type => :model do
 
   let(:user) { FactoryGirl.create(:user) }
-  let(:room) { user.rooms.create!(title: "Room", is_public: true) }
-  let!(:game) { room.games.create!(room: room) }
+  let!(:game) { user.games.create! }
 
   subject { Event::Create.new(wrapped, game.events) }
 

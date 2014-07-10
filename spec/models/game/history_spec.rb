@@ -4,8 +4,7 @@ RSpec.describe Game::History, :type => :model do
   let!(:u1) { FactoryGirl.create(:user) }
   let!(:u2) { FactoryGirl.create(:user) }
   let!(:u3) { FactoryGirl.create(:user) }
-  let!(:room) { Room.create(title: "Room", is_public: true) }
-  let(:game) { room.games.create!(users: [u1, u2, u3]) }
+  let(:game) { Game.create!(users: [u1, u2, u3]) }
 
   # lots of setup to fill up the game
   let!(:e1) { game.events.create(user: u1, step: 0, data: "a", sequence: 0) }

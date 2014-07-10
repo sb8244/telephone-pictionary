@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140710033609) do
+ActiveRecord::Schema.define(version: 20140710035113) do
 
   create_table "events", force: true do |t|
     t.integer  "step",       null: false
@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 20140710033609) do
   end
 
   create_table "games", force: true do |t|
-    t.integer  "room_id",                    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "started",    default: false, null: false
@@ -36,13 +35,6 @@ ActiveRecord::Schema.define(version: 20140710033609) do
   end
 
   add_index "games_users", ["user_id", "game_id"], name: "index_games_users_on_user_id_and_game_id", unique: true
-
-  create_table "rooms_users", force: true do |t|
-    t.integer "user_id", null: false
-    t.integer "room_id", null: false
-  end
-
-  add_index "rooms_users", ["user_id", "room_id"], name: "index_rooms_users_on_user_id_and_room_id", unique: true
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

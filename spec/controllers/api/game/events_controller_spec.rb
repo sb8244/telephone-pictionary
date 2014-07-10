@@ -2,8 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Api::Game::EventsController, :type => :controller do
   let(:user) { FactoryGirl.create(:user) }
-  let(:room) { Room.create(title: "Room", is_public: true) }
-  let(:game) { room.games.create!(users: [user]) }
+  let(:game) { user.games.create! }
   let!(:event) { game.events.create!(data: "Test", step: 0, user: user, sequence: 0) }
   let!(:event2) { game.events.create!(data: "Test", step: 1, user: user, sequence: 0) }
 
