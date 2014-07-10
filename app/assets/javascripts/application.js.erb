@@ -37,18 +37,11 @@ APP.config(function($stateProvider, $urlRouterProvider, $locationProvider, Resta
       url: "/",
       templateUrl: "index.html"
     })
-    .state('rooms', {
-      url: "/rooms",
-      templateUrl: "rooms/index.html",
-      abstract: true
-    })
-    .state('rooms.games', {
-      url: "/:room_id/games",
-      templateUrl: "rooms/games.all.html",
-      controller: "RoomGamesController"
-    });
-
-  $stateProvider.state('game', {
+    .state('games', {
+      url: "/games",
+      templateUrl: "games/all.html",
+      controller: "GamesController"
+    }).state('game', {
       url: "/games/:id",
       views: {
         '': {

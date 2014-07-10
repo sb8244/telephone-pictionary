@@ -1,6 +1,6 @@
-APP.controller('RoomGamesController', function($scope, $stateParams, Restangular) {
+APP.controller('GamesController', function($scope, $stateParams, Restangular) {
   function loadGames() {
-    $scope.gameQuery.getList().then(function(games) {
+    Restangular.all("games").getList().then(function(games) {
       $scope.started = [];
       $scope.notStarted = [];
       $scope.finished = [];
@@ -17,14 +17,11 @@ APP.controller('RoomGamesController', function($scope, $stateParams, Restangular
     });
   }
 
-  Restangular.one('rooms', $stateParams.room_id).get().then(function(room) {
-    $scope.room = room;
-    $scope.gameQuery = room.all('games');
-    loadGames();
-  });
+  loadGames();
+
 
   $scope.createNewGame = function() {
-    $scope.room.post("games", {}).then(function(game) {
+    Restangular.all("games").post().then(function(game) {
       loadGames();
     }, function() {
       alert("Game could not be created");

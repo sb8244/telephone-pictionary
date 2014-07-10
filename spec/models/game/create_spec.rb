@@ -8,9 +8,7 @@ RSpec.describe Game::Create, :type => :model do
 
   let(:params) {
     ActionController::Parameters.new({
-      game: {
-        user_ids: [user2.id]
-      }
+      user_ids: [user2.id]
     })
   }
 

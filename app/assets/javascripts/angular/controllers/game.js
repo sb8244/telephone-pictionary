@@ -3,7 +3,6 @@ APP.controller('GameController', function($rootScope, $scope, $stateParams, Rest
 
   $scope.$on('game:updated', function(e, game) {
     $scope.game = game;
-    $scope.room = game.room;
 
     if(game.finished) {
       game.customGET('history').then(function(history) {

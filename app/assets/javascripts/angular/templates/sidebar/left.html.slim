@@ -1,8 +1,1 @@
 div ui-view="left"
-
-ng-include src="sidebarLeftContent" ng-if="sidebarLeftContent"
-.room-bar ng-controller="RoomsController"
-  h3 Rooms
-  ul.list-group
-    li.list-group-item ng-repeat="room in rooms"
-      a ui-sref="rooms.games({room_id: room.id})" {{ room.title }}
