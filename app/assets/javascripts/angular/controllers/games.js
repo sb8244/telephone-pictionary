@@ -1,4 +1,4 @@
-APP.controller('GamesController', function($scope, $stateParams, Restangular) {
+APP.controller('GamesController', function($scope, $stateParams, Restangular, $state) {
   function loadGames() {
     Restangular.all("games").getList().then(function(games) {
       $scope.started = [];
@@ -22,7 +22,7 @@ APP.controller('GamesController', function($scope, $stateParams, Restangular) {
 
   $scope.createNewGame = function() {
     Restangular.all("games").post().then(function(game) {
-      loadGames();
+      $state.go("game", {id: game.id});
     }, function() {
       alert("Game could not be created");
     });

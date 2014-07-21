@@ -17,8 +17,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     request.env["omniauth.auth"]
   end
 
+  def provider_params
+    auth.slice(:provider, :uid)
+  end
+
   def user_from_facebook
-    User.where(auth.slice(:provider, :uid)).first_or_create do |user|
+    User.where(provider_params).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
       user.name = auth.info.name

@@ -18,7 +18,7 @@ class Api::GamesController < Api::BaseController
   end
 
   def start
-    game.update!(started: true)
+    game.update!(started: true, started_on: Time.now)
     game.users.each_with_index do |user, i|
       game.events.create!(step: 0, user: user, data: random_text, sequence: i)
     end

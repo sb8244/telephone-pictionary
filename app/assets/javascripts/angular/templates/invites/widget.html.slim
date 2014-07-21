@@ -1,6 +1,16 @@
 div ng-controller="InviteFriendsController"
+  h4 Current Players
+  table.table ng-show="game.user_names.length"
+    thead: tr
+      th Name
+    tbody
+      tr ng-repeat="name in game.user_names"
+        td {{name}}
+  div.alert.alert-info ng-show="!game.user_names.length"
+    | You're the only one set to play...better add more!
+
   h4 Add tons of friends!
-  table.table.table-striped.table-bordered
+  table.table
     thead
       tr
         th Email

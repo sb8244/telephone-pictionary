@@ -8,6 +8,7 @@ APP.service("Devise", function ($rootScope, RestangularDevise, $state) {
   this.logout = function() {
     RestangularDevise.all("users").customDELETE("sign_out.json").then(function() {
       $state.go('login');
+      $rootScope.signedIn = false;
     });
   };
 });
@@ -20,4 +21,12 @@ APP.run(function($state, Restangular) {
     }
     return true;
   });
+});
+
+APP.run(function($state, $rootScope) {
+  if(user_signed_in === false) {
+    $state.go("login");
+  }
+
+  $rootScope.signedIn = user_signed_in;
 });

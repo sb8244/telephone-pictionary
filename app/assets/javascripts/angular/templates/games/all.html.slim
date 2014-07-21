@@ -1,20 +1,35 @@
-button.btn.btn-success(ng-click="createNewGame()") Create New Game
+section
+  h3
+    ' Get back into these games
+    a ng-click="createNewGame()" = "(or create a new one)"
+  table.table.games ng-show="started.length"
+    thead: tr
+      td Started On
+      td Friends
+    tbody
+      tr ng-repeat="game in started" ui-sref="game({id: game.id})"
+        td {{game.started_on | date: "short" }}
+        td {{game.user_names | joinBy: ', '}}
 
 section
-  h4 In Progress
-  ul
-    li(ng-repeat="game in started")
-      a(ui-sref="game({id: game.id})") {{game.created_at}}
+  h3 Add your friends and start these games
+  table.table.games ng-show="notStarted.length"
+    thead: tr
+      td Created At
+      td Friends
+    tbody
+      tr ng-repeat="game in notStarted" ui-sref="game({id: game.id})"
+        td {{game.created_at | date: "short" }}
+        td {{game.user_names | joinBy: ', '}}
 
 section
-  h4 Not Started
-  ul
-    li(ng-repeat="game in notStarted")
-      a(ui-sref="game({id: game.id})") {{game.created_at}}
-
-section
-  h4 Finished
-  ul
-    li(ng-repeat="game in finished")
-      a(ui-sref="game({id: game.id})") {{game.created_at}}
+  h3 Check out these finished games
+  table.table.games ng-show="finished.length"
+    thead: tr
+      td Started On
+      td Friends
+    tbody
+      tr ng-repeat="game in finished" ui-sref="game({id: game.id})"
+        td {{game.started_on | date: "short" }}
+        td {{game.user_names | joinBy: ', '}}
 

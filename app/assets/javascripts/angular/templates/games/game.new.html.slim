@@ -1,6 +1,7 @@
-h3 Time to Play!
+h3
+  ' Time to Play!
+  span ng-if="game.game_length > 1"
+    button.btn.btn-default ng-click="startGame(game)" Start Game
 p Players in this game: {{game.game_length}} (more players means more fun!)
 
-ng-include src="'invites/widget.html'"
-div ng-if="game.game_length > 1"
-  button.btn.btn-default ng-click="startGame(game)" Start Game
+ng-include src="'invites/widget.html'" ng-init="game = game"

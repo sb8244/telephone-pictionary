@@ -3,12 +3,26 @@
  *= require_tree .
  *= require_self
  */
-@import "bootstrap";
 
-$app-background: #fff;
+$grid-gutter-width: 30px;
+$container-desktop: ((720px + $grid-gutter-width));
+
+/* Colors */
+$app-background: #068587;
+$app-foreground: #eee;
+
+$brand-primary: #F2B134;
+$brand-info: #ED553B;
+
+@import "bootstrap";
 
 body {
   background: $app-background;
+  color: $app-foreground;
+}
+
+a {
+  cursor: pointer;
 }
 
 canvas.drawing {
@@ -18,10 +32,11 @@ canvas.drawing {
 }
 
 .jumbotron {
+  @extend .text-center;
   width: 100%;
   height: 200px;
-  background: #ED553B;
-  color: $app-background;
+  background: $app-background; //#ED553B;
+  color: $app-foreground;
 
   h1 {
     font-size: $font-size-h2;
@@ -29,9 +44,13 @@ canvas.drawing {
 }
 
 header {
-  float: right;
-  padding-right: 10px;
-  margin-top: -70px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+
+  a, button {
+    margin-left: 15px;
+  }
 }
 
 .finished {
@@ -44,5 +63,14 @@ header {
   @extend .well;
 
   .history {
+  }
+}
+
+table.games {
+  tbody {
+    tr {
+      @extend .alert-info;
+      cursor: pointer;
+    }
   }
 }

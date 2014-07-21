@@ -35,7 +35,9 @@ APP.config(function($stateProvider, $urlRouterProvider, $locationProvider, Resta
   $stateProvider
     .state('index', {
       url: "/",
-      templateUrl: "index.html"
+      //templateUrl: "index.html",
+      templateUrl: "games/all.html",
+      controller: "GamesController"
     })
     .state('games', {
       url: "/games",

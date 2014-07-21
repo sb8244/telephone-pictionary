@@ -3,16 +3,19 @@ html( ng-app=Rails.application.class.parent_name )
   head
     title PassPic
     = stylesheet_link_tag 'application', media: 'all'
-    = javascript_include_tag 'application'
   body
     .jumbotron
       p Connect your Facebook. Add your friends. Then...
       h1 Pass The Picture!
     header ng-controller="HeaderController"
-      button.btn.btn-info ng-click="logout()"  Sign Out
+      a.btn.btn-info ui-sref="games" Games
+      button.btn.btn-info ng-show="signedIn" ng-click="logout()"  Sign Out
     .container
       .row
-        .col-md-3
-          div(ng-include="'sidebar/left.html'")
         .col-md-9
           div(ui-view)
+        .col-md-3
+          div(ng-include="'sidebar/left.html'")
+    javascript:
+      var user_signed_in = #{user_signed_in?};
+    = javascript_include_tag 'application'

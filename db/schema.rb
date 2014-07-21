@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140710035113) do
+ActiveRecord::Schema.define(version: 20140721042347) do
 
   create_table "events", force: true do |t|
     t.integer  "step",       null: false
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20140710035113) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "started",    default: false, null: false
+    t.datetime "started_on"
   end
 
   create_table "games_users", force: true do |t|

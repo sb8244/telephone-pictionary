@@ -1,7 +1,8 @@
 class GameSerializer < ActiveModel::Serializer
-  attributes :id, :game_length, :created_at, :started,
+  attributes :id, :game_length, :created_at, :started, :started_on,
              :current_step, :current_step_type, :finished?,
-             :round_data, :waiting_on, :step_completed?, :round_sequence
+             :round_data, :waiting_on, :step_completed?, :round_sequence,
+             :user_names
 
   has_many :waiting_on, serializer: UserSerializer
 
@@ -11,6 +12,11 @@ class GameSerializer < ActiveModel::Serializer
 
   def round_sequence
     object.sequence_id(current_user)
+  end
+
+  def user_names
+    object.users.reject{ |u| u.id == current_user.id }
+                .map{ |u| u.name }
   end
 
   # The waiting on list has who is not completed for this step
