@@ -10,6 +10,7 @@
 = require lodash
 = require restangular
 = require angular-ui-router
+= require angular-pusher
 
 = require_self
 = require_tree ./angular/templates
@@ -19,7 +20,8 @@
 var APP = angular.module('<%= Rails.application.class.parent_name %>', [
   'ui.router',
   'templates',
-  'restangular'
+  'restangular',
+  'doowb.angular-pusher'
 ]);
 
 APP.config(function($stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider) {
@@ -58,4 +60,10 @@ APP.config(function($stateProvider, $urlRouterProvider, $locationProvider, Resta
     });
 
   $locationProvider.html5Mode(true);
+}).
+
+config(function(PusherServiceProvider) {
+  PusherServiceProvider.
+      setToken("<%= ENV["PUSHER_KEY"] %>").
+      setOptions({encrypted: true});
 });

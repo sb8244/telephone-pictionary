@@ -27,6 +27,10 @@ class Game < ActiveRecord::Base
     users - users_completed
   end
 
+  def users_except(user)
+    users.reject{ |u| u == user }
+  end
+
   ### Last Event for User methods ###
 
   def sequence_id(user)

@@ -18,4 +18,5 @@ html( ng-app=Rails.application.class.parent_name )
           div(ng-include="'sidebar/left.html'")
     javascript:
       var user_signed_in = #{user_signed_in?};
+      var user_id = #{current_user.id};
     = javascript_include_tag 'application'

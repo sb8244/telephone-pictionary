@@ -9,6 +9,7 @@ APP.service("Devise", function ($rootScope, RestangularDevise, $state) {
     RestangularDevise.all("users").customDELETE("sign_out.json").then(function() {
       $state.go('login');
       $rootScope.signedIn = false;
+      delete $rootScope.userId;
     });
   };
 });
@@ -17,6 +18,8 @@ APP.run(function($state, Restangular) {
   Restangular.setErrorInterceptor(function(response, deferred, responseHandler) {
     if(response.status == 401) {
       $state.go("login");
+      $rootScope.signedIn = false;
+      delete $rootScope.userId;
       return false;
     }
     return true;
@@ -24,9 +27,11 @@ APP.run(function($state, Restangular) {
 });
 
 APP.run(function($state, $rootScope) {
+  $rootScope.signedIn = user_signed_in;
+
   if(user_signed_in === false) {
-    $state.go("login");
+    return $state.go("login");
   }
 
-  $rootScope.signedIn = user_signed_in;
+  $rootScope.userId = user_id;
 });

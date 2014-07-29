@@ -33,5 +33,14 @@ RSpec.describe Api::Game::EventsController, :type => :controller do
         post :create, game_id: game.id, event: { step: 0, data: "Test", sequence: 0 }
       }.to change{ game.events.count }.by(1)
     end
+
+    context "with other users" do
+      before(:each) { game.users << FactoryGirl.create(:user) }
+
+      it "triggers pusher" do
+        expect(Pusher).to receive(:trigger).exactly(1).times
+        post :create, game_id: game.id, event: { step: 0, data: "Test", sequence: 0 }
+      end
+    end
   end
 end

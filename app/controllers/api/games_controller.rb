@@ -10,7 +10,7 @@ class Api::GamesController < Api::BaseController
   end
 
   def create
-    render json: Game::Create.new(params, games).execute!
+    render json: games.create!(game_params)
   end
 
   def destroy
@@ -50,6 +50,10 @@ class Api::GamesController < Api::BaseController
 
   def game
     Game.find(params[:id])
+  end
+
+  def game_params
+    params.require(:game).permit(user_ids: [])
   end
 
   def random_text

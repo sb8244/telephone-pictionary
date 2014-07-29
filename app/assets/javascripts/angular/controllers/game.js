@@ -1,5 +1,9 @@
-APP.controller('GameController', function($rootScope, $scope, $stateParams, Restangular, Game) {
+APP.controller('GameController', function($rootScope, $scope, $stateParams, Restangular, Game, Pusher) {
   Game.load($stateParams.id);
+
+  Pusher.subscribe('user-' + $rootScope.userId, 'game.load', function(gameId) {
+    Game.load(gameId);
+  });
 
   $scope.$on('game:updated', function(e, game) {
     $scope.game = game;
@@ -13,7 +17,7 @@ APP.controller('GameController', function($rootScope, $scope, $stateParams, Rest
 
   $scope.startGame = function(game) {
     game.customPOST({}, "start").then(function(game) {
-      $scope.game = game;
+      Game.set(game);
     });
   };
 

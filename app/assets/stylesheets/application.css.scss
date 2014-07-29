@@ -63,6 +63,9 @@ header {
   @extend .well;
 
   .history {
+    .guess {
+      color: black;
+    }
   }
 }
 

@@ -7,20 +7,20 @@ class GameSerializer < ActiveModel::Serializer
   has_many :waiting_on, serializer: UserSerializer
 
   def round_data
-    object.round_data(current_user)
+    object.round_data(scope)
   end
 
   def round_sequence
-    object.sequence_id(current_user)
+    object.sequence_id(scope)
   end
 
   def user_names
-    object.users.reject{ |u| u.id == current_user.id }
+    object.users.reject{ |u| u.id == scope.id }
                 .map{ |u| u.name }
   end
 
   # The waiting on list has who is not completed for this step
   def step_completed?
-    !object.waiting_on.include?(current_user)
+    !object.waiting_on.include?(scope)
   end
 end

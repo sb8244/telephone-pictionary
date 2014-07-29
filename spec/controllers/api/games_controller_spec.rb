@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Api::GamesController, :type => :controller do
   let!(:user) { FactoryGirl.create(:user) }
+  let!(:user2) { FactoryGirl.create(:user) }
   let!(:game) { user.games.create! }
 
   before(:each) do
@@ -28,6 +29,12 @@ RSpec.describe Api::GamesController, :type => :controller do
       expect{
         post :create, game: { user_ids: [FactoryGirl.create(:user).id] }
       }.to change{ user.games.count }.by(1)
+    end
+
+    it "adds players to the game" do
+      post :create, game: { user_ids: [user2.id] }
+      expect(Game.last.users).to include(user)
+      expect(Game.last.users).to include(user2)
     end
   end
 

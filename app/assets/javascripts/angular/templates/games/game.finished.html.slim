@@ -3,7 +3,7 @@
 
 .history-sequence ng-repeat="sequence in history"
   .history ng-repeat="event in sequence"
-    div ng-if="event.type == 'text'"
+    div.guess ng-if="event.type == 'text'"
       | Word: {{event.data}}
     div ng-if="event.type == 'drawing'"
       p: img src="{{event.data}}"

@@ -6,7 +6,6 @@ APP.factory("Game", function($rootScope, Restangular) {
     lastId = id;
     Restangular.one("games", id).get().then(function(_game) {
       game = _game;
-      window.game = game;
       game.playing = game.started && !game.finished;
       $rootScope.$broadcast('game:updated', game);
     });
@@ -23,6 +22,12 @@ APP.factory("Game", function($rootScope, Restangular) {
 
     get: function() {
       return game;
+    },
+
+    set: function(_game) {
+      game = _game;
+      game.playing = game.started && !game.finished;
+      $rootScope.$broadcast('game:updated', game);
     }
   };
 });
