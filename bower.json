@@ -3,6 +3,7 @@
   "dependencies": {
     "angular": "~1.2.19",
     "restangular": "~1.4.0",
-    "angular-ui-router": "0.2.10"
+    "angular-ui-router": "0.2.10",
+    "angular-pusher": "~0.0.8"
   }
 }
