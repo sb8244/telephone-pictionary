@@ -8,8 +8,9 @@ html( ng-app=Rails.application.class.parent_name )
       p Connect your Facebook. Add your friends. Then...
       h1 Pass The Picture!
     header ng-controller="HeaderController"
-      a.btn.btn-info ui-sref="games" Games
-      button.btn.btn-info ng-show="signedIn" ng-click="logout()"  Sign Out
+      span.auth-only ng-show="signedIn"
+        a.btn.btn-info ui-sref="games" Games
+        button.btn.btn-info ng-click="logout()"  Sign Out
     .container
       .row
         .col-md-9
@@ -18,5 +19,5 @@ html( ng-app=Rails.application.class.parent_name )
           div(ng-include="'sidebar/left.html'")
     javascript:
       var user_signed_in = #{user_signed_in?};
-      var user_id = #{current_user.id};
+      var user_id = '#{current_user.try!(:id)}';
     = javascript_include_tag 'application'
