@@ -4,7 +4,7 @@ div.current_step_type
   div ng-if="!game.step_completed"
     div ng-if="game.current_step_type == 'text'"
       strong Time to Guess!
-      p: img src="{{game.round_data}}"
+      p: img ng-src="game.round_data"
       p: input ng-model="input.guess"
       p: button.btn.btn-primary(ng-click="submitGuess()") Submit Guess!
 
