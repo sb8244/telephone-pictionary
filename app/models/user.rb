@@ -5,13 +5,4 @@ class User < ActiveRecord::Base
 
   has_many :drawings
   has_many :events
-
-  # make current_user available everywhere
-  def self.current
-    Thread.current[:user]
-  end
-
-  def self.current=(user)
-    Thread.current[:user] = user
-  end
 end

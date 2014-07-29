@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
   after_filter :set_csrf_cookie_for_ng
 
   skip_before_filter :authenticate_user!
-  before_filter :set_current_user
 
   def index
   end
@@ -31,10 +30,5 @@ class ApplicationController < ActionController::Base
 
   def verified_request?
     super || form_authenticity_token == request.headers['X-XSRF-TOKEN']
-  end
-
-  # Makes the user available in all models, which is pretty handy
-  def set_current_user
-    User.current = current_user if current_user
   end
 end
